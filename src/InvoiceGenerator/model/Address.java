@@ -1,11 +1,14 @@
 package InvoiceGenerator.model;
 
+import InvoiceGenerator.service.ZipCodeValidator;
+
 public class Address {
     private String city;
     private String street;
     private String building;
-    private String apartament;
+    private String apartment;
     private String zipCode;
+    private boolean valid;
 
     public String getCity() {
         return city;
@@ -19,19 +22,25 @@ public class Address {
         return building;
     }
 
-    public String getApartament() {
-        return apartament;
+    public String getApartment() {
+        return apartment;
     }
 
     public String getZipCode() {
         return zipCode;
     }
 
-    public Address(String city, String street, String building, String apartament, String zipCode) {
+    public boolean isValid() {
+        return valid;
+    }
+
+    public Address(String city, String street, String building, String apartment, String zipCode) {
         this.city = city;
         this.street = street;
         this.building = building;
-        this.apartament = apartament;
+        this.apartment = apartment;
         this.zipCode = zipCode;
+        ZipCodeValidator zipCodeValidator = new ZipCodeValidator(this.zipCode);
+        this.valid = zipCodeValidator.isValid();
     }
 }

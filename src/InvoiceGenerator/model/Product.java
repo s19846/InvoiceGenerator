@@ -17,6 +17,10 @@ public class Product {
         return vatValue;
     }
 
+    public double getBruttoPrice() {
+        return this.nettoPrice * (1 + this.vatValue);
+    }
+
     public Product(String name, double nettoPrice, double vatValue) {
         this.name = name;
         this.nettoPrice = nettoPrice;

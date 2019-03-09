@@ -1,12 +1,14 @@
 package InvoiceGenerator.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class Invoice {
     private Product product;
+    private Company company;
     private int amount;
-    private String serialNumber;
-    private Date sentDate;
+    private String serial;
+    private Date generatedDate;
     private Date saleDate;
     private Date paymentDate;
 
@@ -14,16 +16,20 @@ public class Invoice {
         return product;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
     public int getAmount() {
         return amount;
     }
 
-    public String getSerialNumber() {
-        return serialNumber;
+    public String getSerial() {
+        return serial;
     }
 
-    public Date getSentDate() {
-        return sentDate;
+    public Date getGeneratedDate() {
+        return generatedDate;
     }
 
     public Date getSaleDate() {
@@ -44,13 +50,23 @@ public class Invoice {
 
     public Invoice(
             Product product,
+            Company company,
             int amount,
-            String serialNumber,
-            Date sentDate
+            Date saleDate,
+            Date paymentDate
     ) {
         this.product = product;
+        this.company = company;
         this.amount = amount;
-        this.serialNumber = serialNumber;
-        this.sentDate = sentDate;
+        this.saleDate = saleDate;
+        this.paymentDate = paymentDate;
+        this.generatedDate = new Date();
+        this.serial = this.generateInvoiceSerial();
+    }
+
+    private String generateInvoiceSerial() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this.generatedDate);
+        return "INV/" + calendar.get(Calendar.YEAR) + "/" + calendar.get(Calendar.MONTH) + "/5142/76";
     }
 }
